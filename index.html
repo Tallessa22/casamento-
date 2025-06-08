@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Checklist do Casamento – Talles & Katy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      margin: 0;
+      padding: 20px;
+      color: #444;
+      /* --- IMAGEM DE FUNDO --- */
+      background-image: url('http://googleusercontent.com/image_generation_content/0');
+      background-size: cover;
+      background-position: center center;
+      background-attachment: fixed;
+    }
+    h1, h2 {
+      font-family: 'Playfair Display', serif;
+      color: #8C5E58; /* Tom de rosa queimado */
+      text-align: center;
+    }
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 5px;
+    }
+    h2 {
+       font-size: 1.8em;
+    }
+    .subtitle {
+      text-align: center;
+      margin-top: 0;
+      color: #7f8c8d;
+      font-weight: normal;
+      font-size: 1.1em;
+    }
+    #checklist-container {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      border-radius: 15px;
+      /* Efeito de vidro fosco para garantir a legibilidade */
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(5px);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+    }
+    .mes {
+      margin-bottom: 25px;
+      padding: 20px;
+      border: 1px solid #EAE0D5; /* Borda suave */
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.8);
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+      transition: all 0.3s ease;
+    }
+    .mes-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+      border-bottom: 1px solid #EAE0D5;
+      padding-bottom: 10px;
+    }
+    .mes h2 {
+      text-align: left;
+      font-size: 1.4em;
+      margin: 0;
+    }
+    .mes-timeline {
+      font-style: italic;
+      color: #C6AD8F; /* Tom de dourado suave */
+      font-weight: 600;
+      font-size: 0.9em;
+    }
+    .task-label {
+      display: flex;
+      align-items: center;
+      padding: 12px 5px;
+      border-bottom: 1px solid #f5f5f5;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .task-label:last-child {
+      border-bottom: none;
+    }
+    .task-label:hover {
+      background-color: rgba(234, 224, 213, 0.3); /* Dourado bem claro no hover */
+    }
+    input[type="checkbox"] {
+      width: 1.3em;
+      height: 1.3em;
+      margin-right: 15px;
+      cursor: pointer;
+      accent-color: #8C5E58; /* Cor principal nos checkboxes */
+    }
+    .concluido {
+      text-decoration: line-through;
+      color: #95a5a6;
+      opacity: 0.7;
+    }
+    /* --- Barra de Progresso --- */
+    .progress-bar-container {
+      width: 100%;
+      background-color: #ecf0f1;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      overflow: hidden;
+      height: 12px;
+    }
+    .progress-bar {
+      width: 0%;
+      height: 100%;
+      background-color: #C6AD8F; /* Tom de dourado para progresso */
+      border-radius: 10px;
+      transition: width 0.5s ease-in-out;
+    }
+    #total-progress-bar-outer {
+      height: 20px;
+      width: 100%;
+      background-color: #ecf0f1;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-top:10px;
+    }
+    #total-progress-bar {
+      height: 100%;
+      text-align: center;
+      color: white;
+      font-weight: 600;
+      line-height: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Checklist do Casamento</h1>
+  <p class="subtitle" id="wedding-title"></p>
+  
+  <div id="checklist-container">
+    <div id="total-progress-container">
+      <h2>Progresso Total</h2>
+      <div id="total-progress-bar-outer">
+        <div id="total-progress-bar" class="progress-bar"></div>
+      </div>
+    </div>
+    <div id="months-container" style="margin-top: 30px;"></div>
+  </div>
+
+  <script>
+    // --- CONFIGURAÇÃO PRINCIPAL ---
+    const weddingDate = new Date('2025-10-25T00:00:00');
+    const groomName = "Talles";
+    const brideName = "Katy"; // <-- NOME ATUALIZADO AQUI
+
+    // --- ESTRUTURA DE DADOS DO CHECKLIST (ATUALIZADA) ---
+    const checklistData = [
+      {
+        monthOffset: 4,
+        title: 'JUNHO',
+        tasks: [
+          { id: 'junho1', text: 'Definir orçamento total do casamento' },
+          { id: 'junho2', text: 'Fechar local da cerimônia e da festa' },
+          { id: 'junho3', text: 'Definir estilo do casamento (simples, rústico, elegante etc.)' },
+          { id: 'junho4', text: 'Escolher e reservar Buffet' },
+          { id: 'junho5', text: 'Escolher e reservar Cerimonialista (se for contratar)' },
+          { id: 'junho6', text: 'Escolher e reservar Decoração' },
+          { id: 'junho7', text: 'Escolher e reservar Fotógrafo e filmagem' },
+          { id: 'junho8', text: 'Escolher e reservar Música/DJ' },
+          { id: 'junho9', text: 'Fazer lista preliminar de convidados' },
+          { id: 'junho10', text: 'Convidar padrinhos e madrinhas' },
+          { id: 'junho11', text: 'Comprar ou encomendar vestido da noiva / traje do noivo' },
+          { id: 'junho12', text: 'Escolher tema de decoração e paleta de cores' }
+        ]
+      },
+      {
+        monthOffset: 3,
+        title: 'JULHO',
+        tasks: [
+          { id: 'julho1', text: 'Definir e contratar Doces e bolo' },
+          { id: 'julho2', text: 'Definir e contratar Aluguel de mobília (mesas, cadeiras, etc.)' },
+          { id: 'julho3', text: 'Encomendar lembrancinhas' },
+          { id: 'julho4', text: 'Reservar dia da noiva e maquiagem/penteado' },
+          { id: 'julho5', text: 'Comprar/ajustar alianças (se ainda não tiverem)' },
+          { id: 'julho6', text: 'Começar a montar playlist da cerimônia e da festa' },
+          { id: 'julho7', text: 'Criar convites digitais ou mandar fazer os físicos' },
+          { id: 'julho8', text: 'Confirmar presença dos padrinhos e madrinhas' },
+          { id: 'julho9', text: 'Enviar "Save the Date" por WhatsApp ou redes sociais' }
+        ]
+      },
+      {
+        monthOffset: 2,
+        title: 'AGOSTO',
+        tasks: [
+          { id: 'agosto1', text: 'Enviar convites oficiais (físicos ou digitais)' },
+          { id: 'agosto2', text: 'Verificar documentos necessários no cartório (para casamento civil)' },
+          { id: 'agosto3', text: 'Acertar detalhes com Celebrante / pastor / padre' },
+          { id: 'agosto4', text: 'Acertar detalhes com responsável pela cerimônia religiosa' },
+          { id: 'agosto5', text: 'Definir trajes dos padrinhos e madrinhas (se for padronizado)' },
+          { id: 'agosto6', text: 'Escolher músicas da cerimônia' },
+          { id: 'agosto7', 'text': 'Planejar ensaio (se for fazer)' },
+          { id: 'agosto8', text: 'Definir responsável por levar alianças, entrada de daminha/pajem etc.' }
+        ]
+      },
+      {
+        monthOffset: 1,
+        title: 'SETEMBRO',
+        tasks: [
+          { id: 'setembro1', text: 'Confirmar presença dos convidados (RSVP)' },
+          { id: 'setembro2', text: 'Fazer degustação final do buffet e doces' },
+          { id: 'setembro3', text: 'Conferir ajustes de roupas' },
+          { id: 'setembro4', text: 'Fechar roteiro do dia do casamento (cronograma)' },
+          { id: 'setembro5', text: 'Reunião final com cerimonialista ou responsável' },
+          { id: 'setembro6', text: 'Comprar bebidas (se for por conta própria)' },
+          { id: 'setembro7', text: 'Separar itens para o "Kit Emergência dos Noivos"' },
+          { id: 'setembro8', text: 'Últimos detalhes da decoração' },
+          { id: 'setembro9', text: 'Fazer ensaio geral (se for o caso)' }
+        ]
+      },
+      {
+        monthOffset: 0,
+        title: 'OUTUBRO',
+        tasks: [
+          { id: 'outubro1', text: 'Fazer manicure, depilação, cuidados de beleza' },
+          { id: 'outubro2', text: 'Montar/Embalar lembrancinhas' },
+          { id: 'outubro3', text: 'Organizar as malas para noite de núpcias ou viagem' },
+          { id: 'outubro4', text: 'Entregar itens aos fornecedores (doces, bebidas, topo de bolo, etc.)' },
+          { id: 'outubro5', text: 'Checar pagamentos pendentes e quitar o que falta' },
+          { id: 'outubro6', text: 'RELAXAR E APROVEITAR O GRANDE DIA!' }
+        ]
+      }
+    ];
+
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('wedding-title').textContent = `${groomName} & ${brideName} | ${weddingDate.toLocaleDateString('pt-BR')}`;
+      
+      const monthsContainer = document.getElementById('months-container');
+      
+      renderChecklist();
+      loadStateAndAttachListeners();
+      updateProgress();
+
+      function getMonthDiff(d1, d2) {
+        let months;
+        months = (d2.getFullYear() - d1.getFullYear()) * 12;
+        months -= d1.getMonth();
+        months += d2.getMonth();
+        return months <= 0 ? 0 : months;
+      }
+
+      function renderChecklist() {
+        const today = new Date();
+        
+        checklistData.sort((a, b) => b.monthOffset - a.monthOffset);
+
+        checklistData.forEach(monthData => {
+          const monthDiv = document.createElement('div');
+          monthDiv.className = 'mes';
+          monthDiv.id = `month-${monthData.monthOffset}`;
+
+          const weddingMonth = new Date(weddingDate);
+          weddingMonth.setMonth(weddingMonth.getMonth() - monthData.monthOffset);
+          const monthYear = weddingMonth.toLocaleDateString('pt-BR', { month: 'long', year: 'numeric' }).toUpperCase();
+          const monthsRemaining = getMonthDiff(today, weddingDate);
+          
+          let timelineText = `${monthData.monthOffset} meses antes`;
+          if (monthData.monthOffset === 1) {
+            timelineText = '1 mês antes';
+          } else if (monthData.monthOffset === 0) {
+            timelineText = 'Mês do casamento!';
+          }
+
+          monthDiv.innerHTML = `
+            <div class="mes-header">
+              <h2>${monthYear}</h2>
+              <span class="mes-timeline">${timelineText}</span>
+            </div>
+            <div class="progress-bar-container">
+              <div id="progress-${monthData.monthOffset}" class="progress-bar"></div>
+            </div>
+          `;
+
+          monthData.tasks.forEach(task => {
+            const label = document.createElement('label');
+            label.className = 'task-label';
+            label.innerHTML = `
+              <input type="checkbox" data-id="${task.id}" data-month-id="${monthData.monthOffset}"> ${task.text}
+            `;
+            monthDiv.appendChild(label);
+          });
+          
+          if(monthsRemaining <= monthData.monthOffset) {
+             monthDiv.style.borderColor = '#C6AD8F';
+          }
+
+          monthsContainer.appendChild(monthDiv);
+        });
+      }
+      
+      function loadStateAndAttachListeners() {
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        checkboxes.forEach(cb => {
+          if (localStorage.getItem(cb.dataset.id) === 'true') {
+            cb.checked = true;
+            cb.parentElement.classList.add('concluido');
+          }
+          
+          cb.addEventListener('change', () => {
+            localStorage.setItem(cb.dataset.id, cb.checked);
+            cb.parentElement.classList.toggle('concluido', cb.checked);
+            updateProgress();
+          });
+        });
+      }
+
+      function updateProgress() {
+        let totalTasks = 0;
+        let totalCompleted = 0;
+
+        checklistData.forEach(monthData => {
+          const tasksInMonth = monthData.tasks.length;
+          let completedInMonth = 0;
+          
+          monthData.tasks.forEach(task => {
+            if (localStorage.getItem(task.id) === 'true') {
+              completedInMonth++;
+            }
+          });
+          
+          totalTasks += tasksInMonth;
+          totalCompleted += completedInMonth;
+
+          const monthProgress = tasksInMonth > 0 ? (completedInMonth / tasksInMonth) * 100 : 0;
+          const monthProgressBar = document.getElementById(`progress-${monthData.monthOffset}`);
+          if (monthProgressBar) {
+            monthProgressBar.style.width = `${monthProgress}%`;
+          }
+        });
+
+        const totalProgress = totalTasks > 0 ? (totalCompleted / totalTasks) * 100 : 0;
+        const totalProgressBar = document.getElementById('total-progress-bar');
+        totalProgressBar.style.width = `${totalProgress}%`;
+        totalProgressBar.textContent = `${Math.round(totalProgress)}%`;
+      }
+    });
+  </script>
+</body>
+</html>
