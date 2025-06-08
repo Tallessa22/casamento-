@@ -1,0 +1,117 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Checklist do Casamento – Talles</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background: #fefefe;
+    }
+    h1, h2 {
+      color: #333;
+    }
+    .mes {
+      margin-bottom: 20px;
+      padding: 15px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      background: #f9f9f9;
+    }
+    label {
+      display: block;
+      margin-bottom: 10px;
+      cursor: pointer;
+    }
+    input[type="checkbox"] {
+      margin-right: 10px;
+    }
+    .concluido {
+      text-decoration: line-through;
+      color: #999;
+    }
+  </style>
+</head>
+<body>
+  <h1>Checklist do Casamento – Talles (25/10/2025)</h1>
+
+  <div class="mes">
+    <h2>JUNHO – 4 meses antes</h2>
+    <label><input type="checkbox"> Definir orçamento total do casamento</label>
+    <label><input type="checkbox"> Fechar local da cerimônia e da festa</label>
+    <label><input type="checkbox"> Definir estilo do casamento</label>
+    <label><input type="checkbox"> Escolher e reservar buffet, decoração, fotógrafo etc.</label>
+    <label><input type="checkbox"> Fazer lista preliminar de convidados</label>
+    <label><input type="checkbox"> Convidar padrinhos e madrinhas</label>
+    <label><input type="checkbox"> Comprar ou encomendar traje dos noivos</label>
+    <label><input type="checkbox"> Escolher tema de decoração e paleta de cores</label>
+  </div>
+
+  <div class="mes">
+    <h2>JULHO – 3 meses antes</h2>
+    <label><input type="checkbox"> Contratar doces, bolo, aluguel de itens</label>
+    <label><input type="checkbox"> Encomendar lembrancinhas</label>
+    <label><input type="checkbox"> Reservar maquiagem, penteado e dia da noiva</label>
+    <label><input type="checkbox"> Comprar/ajustar alianças</label>
+    <label><input type="checkbox"> Montar playlist</label>
+    <label><input type="checkbox"> Criar e enviar convites</label>
+    <label><input type="checkbox"> Confirmar presença dos padrinhos</label>
+    <label><input type="checkbox"> Enviar 'Save the Date'</label>
+  </div>
+
+  <div class="mes">
+    <h2>AGOSTO – 2 meses antes</h2>
+    <label><input type="checkbox"> Enviar convites oficiais</label>
+    <label><input type="checkbox"> Verificar documentos no cartório</label>
+    <label><input type="checkbox"> Acertar detalhes com celebrante</label>
+    <label><input type="checkbox"> Definir trajes dos padrinhos</label>
+    <label><input type="checkbox"> Escolher músicas da cerimônia</label>
+    <label><input type="checkbox"> Planejar ensaio</label>
+    <label><input type="checkbox"> Definir responsáveis por entrada de alianças, daminha etc.</label>
+  </div>
+
+  <div class="mes">
+    <h2>SETEMBRO – 1 mês antes</h2>
+    <label><input type="checkbox"> Confirmar presença dos convidados</label>
+    <label><input type="checkbox"> Fazer degustação final</label>
+    <label><input type="checkbox"> Conferir ajustes das roupas</label>
+    <label><input type="checkbox"> Fechar roteiro do dia</label>
+    <label><input type="checkbox"> Reunião final com cerimonialista</label>
+    <label><input type="checkbox"> Comprar bebidas</label>
+    <label><input type="checkbox"> Preparar 'Kit Emergência dos Noivos'</label>
+    <label><input type="checkbox"> Ajustar últimos detalhes da decoração</label>
+    <label><input type="checkbox"> Fazer ensaio geral</label>
+  </div>
+
+  <div class="mes">
+    <h2>OUTUBRO – mês do casamento</h2>
+    <label><input type="checkbox"> Fazer cuidados de beleza</label>
+    <label><input type="checkbox"> Montar lembrancinhas</label>
+    <label><input type="checkbox"> Organizar malas para noite de núpcias</label>
+    <label><input type="checkbox"> Entregar itens aos fornecedores</label>
+    <label><input type="checkbox"> Checar pagamentos pendentes</label>
+  </div>
+
+  <div class="mes">
+    <h2>DIA 25/10 – O GRANDE DIA!</h2>
+    <label><input type="checkbox"> Acordar cedo e tranquilo</label>
+    <label><input type="checkbox"> Tomar café leve e se hidratar</label>
+    <label><input type="checkbox"> Aproveitar o casamento com alegria!</label>
+  </div>
+
+  <script>
+    document.querySelectorAll("input[type=checkbox]").forEach((checkbox) => {
+      checkbox.addEventListener("change", function () {
+        if (this.checked) {
+          this.parentElement.classList.add("concluido");
+        } else {
+          this.parentElement.classList.remove("concluido");
+        }
+      });
+    });
+  </script>
+</body>
+</html>
